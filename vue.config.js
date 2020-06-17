@@ -23,6 +23,7 @@
 //   }
 // }
 
+let UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
   // publicPath:process.env.NODE_ENV === 'production' ? '/vue_workspac/aihuhuproject/' : '/',
 
@@ -42,6 +43,16 @@ module.exports = {
     extract: true,
     // 开启 CSS source maps?
     sourceMap: false
+  },
+  configureWebpack: config => {
+    new UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        drop_console: true,
+        pure_funcs: ['console.log']
+      },
+      sourceMap: false
+    })
   },
   // webpack-dev-server 相关配置
   devServer: {
